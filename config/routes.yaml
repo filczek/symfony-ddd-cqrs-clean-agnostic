@@ -1,0 +1,5 @@
+post_api:
+    resource:
+        path: ../src/Post/Interface/Api
+        namespace: App\Post\Interface\Api
+    type: attribute

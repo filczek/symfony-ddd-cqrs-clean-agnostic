@@ -1,0 +1,76 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+
+        failure_transport: failed_messages
+        default_bus: none.bus
+
+        buses:
+            none.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+            command.bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - doctrine_transaction
+            query.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+            event.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+            projection.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - doctrine_transaction
+        
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+            # sync: 'sync://'
+
+            # Command Transports
+            commands_async: '%env(COMMAND_BUS_TRANSFORM_DSN)%'
+            commands_sync: 'sync://'
+
+            # Query Transports
+            queries_sync: 'sync://'
+
+            # Event Transports
+            events_async: '%env(EVENT_BUS_TRANSPORT_DSN)%'
+            events_sync: 'sync://'
+
+            # Projection Transports
+            projections_async: '%env(PROJECTION_BUS_TRANSPORT_DSN)%'
+            projections_sync: 'sync://'
+
+            # Dead letter box
+            failed_messages: '%env(MESSENGER_TRANSPORT_DSN)%'
+
+        routing:
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+
+            'App\Shared\Application\Command\Command': commands_sync
+            'App\Shared\Application\Query\Query': queries_sync
+            'App\Shared\Domain\DomainEvent': events_async
+            'App\Shared\Application\Projection\Projection': projections_async
+
+
+# when@test:
+#    framework:
+#        messenger:
+#            transports:
+#                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+#                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+#                async: 'in-memory://'

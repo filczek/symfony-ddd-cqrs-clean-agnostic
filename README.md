@@ -4,6 +4,10 @@
 
 **Note**: This project is still in its early stages of development, and everything is subject to change.
 
-Despite this, the [Laravel example](https://github.com/filczek/laravel-ddd-cqrs-hex-agnostic) is already up and running. You're welcome to explore the code in the [/src](https://github.com/filczek/laravel-ddd-cqrs-hex-agnostic/tree/master/src) directory, particularly the [Post module](https://github.com/filczek/laravel-ddd-cqrs-hex-agnostic/tree/master/src/Post). This module will eventually be integrated into this project, and rest assured, everything will continue to function as expected.
+## Getting started
 
-Just copy & paste, reimplement the `Interface`, `Infrastructure` layer and configure Symfony to use the stuff in `Shared` folder.
+Refer to [Getting started](https://github.com/dunglas/symfony-docker/tree/caf414344088a0669799d07c355407b113c7cf77?tab=readme-ov-file#getting-started) from [symfony-docker](https://github.com/dunglas/symfony-docker).
+
+## Special thanks
+
+- Kévin Dunglas for creating [symfony-docker](https://github.com/dunglas/symfony-docker), which this project uses.
